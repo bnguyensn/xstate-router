@@ -79,9 +79,10 @@ export function addRouterEvents(history, configObj, routes) {
       match: resolve(routes, history.location)
     }))
   })
+  const machineId = config.id ?? '#(machine)';
   for (const route of routes) {
       on.push({
-        target: '#(machine).' + route[0].join('.'),
+        target: machineId + route[0].join('.'),
         cond: (context, event) => event.dueToStateTransition === false && event.route && event.route === route[1],
         actions: assign(() => ({
             location: history.location,
